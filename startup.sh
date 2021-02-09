@@ -1,30 +1,3 @@
-
-# add to Dockerfile after the FROM; comment out ADD stmt
-# this containers supervisor.conf runs all 6 processes
-RUN chmod 777 /etc/supervisor/conf.d/supervisord.conf
-
-# may need to move this down below the home and root items below
-# prepend $HOME to "/" usages here
-if [ -n "$VNC_PASSWORD" ]; then
-    echo -n "$VNC_PASSWORD" > /.password1
-    x11vnc -storepasswd $(cat /.password1) /.password2
-    chmod 400 /.password*
-    sed -i 's/^command=x11vnc.*/& -rfbauth \/.password2/' /etc/supervisor/conf.d/supervisord.conf
-    export VNC_PASSWORD=
-fi
-
-if [ -n "$X11VNC_ARGS" ]; then
-    sed -i "s/^command=x11vnc.*/& ${X11VNC_ARGS}/" /etc/supervisor/conf.d/supervisord.conf
-fi
-
-if [ -n "$OPENBOX_ARGS" ]; then
-    sed -i "s#^command=/usr/bin/openbox.*#& ${OPENBOX_ARGS}#" /etc/supervisor/conf.d/supervisord.conf
-fi
-
-if [ -n "$RESOLUTION" ]; then
-    sed -i "s/1024x768/$RESOLUTION/" /usr/local/bin/xvfb.sh
-fi
-
 USER=${USER:-root}
 HOME=/root
 if [ "$USER" != "root" ]; then
@@ -41,6 +14,32 @@ if [ "$USER" != "root" ]; then
     [ -d "/dev/snd" ] && chgrp -R adm /dev/snd
 fi
 sed -i -e "s|%USER%|$USER|" -e "s|%HOME%|$HOME|" /etc/supervisor/conf.d/supervisord.conf
+
+# moved this from before home and root items above
+# prepend $HOME to "/" usages here
+if [ -n "$VNC_PASSWORD" ]; then
+    echo -n "$VNC_PASSWORD" > ${HOME}/.password1
+    x11vnc -storepasswd $(cat "${HOME}"/.password1) ${HOME}/.password2
+    chmod 400 ${HOME}/.password*
+    # replace delimiter with ":" so we don't have to quote all slashes in $HOME
+    #sed -i 's/^command=x11vnc.*/& -rfbauth \/.password2/' /etc/supervisor/conf.d/supervisord.conf
+    sed -i "s:^command=x11vnc.*:& -rfbauth ${HOME}/.password2:" /etc/supervisor/conf.d/supervisord.conf
+    export VNC_PASSWORD=
+fi
+
+
+if [ -n "$X11VNC_ARGS" ]; then
+    sed -i "s/^command=x11vnc.*/& ${X11VNC_ARGS}/" /etc/supervisor/conf.d/supervisord.conf
+fi
+
+if [ -n "$OPENBOX_ARGS" ]; then
+    sed -i "s#^command=/usr/bin/openbox.*#& ${OPENBOX_ARGS}#" /etc/supervisor/conf.d/supervisord.conf
+fi
+
+if [ -n "$RESOLUTION" ]; then
+    sed -i "s/1024x768/$RESOLUTION/" /usr/local/bin/xvfb.sh
+fi
+
 
 # home folder
 if [ ! -x "$HOME/.config/pcmanfm/LXDE/" ]; then
