@@ -1,17 +1,17 @@
 USER=${USER:-root}
 HOME=/root
 if [ "$USER" != "root" ]; then
-    echo "* enable custom user: $USER"
-    useradd --create-home --shell /bin/bash --user-group --groups adm,sudo $USER
-    if [ -z "$PASSWORD" ]; then
-        echo "  set default password to \"ubuntu\""
-        PASSWORD=ubuntu
-    fi
-    HOME=/home/$USER
-    echo "$USER:$PASSWORD" | chpasswd
+    #echo "* enable custom user: $USER"
+    #useradd --create-home --shell /bin/bash --user-group --groups adm,sudo $USER
+    #if [ -z "$PASSWORD" ]; then
+    #    echo "  set default password to \"ubuntu\""
+    #    PASSWORD=ubuntu
+    #fi
+    #HOME=/home/$USER
+    #echo "$USER:$PASSWORD" | chpasswd
     cp -r /root/{.config,.gtkrc-2.0,.asoundrc} ${HOME}
-    chown -R $USER:$USER ${HOME}
-    [ -d "/dev/snd" ] && chgrp -R adm /dev/snd
+    #chown -R $USER:$USER ${HOME}
+    #[ -d "/dev/snd" ] && chgrp -R adm /dev/snd
 fi
 sed -i -e "s|%USER%|$USER|" -e "s|%HOME%|$HOME|" /etc/supervisor/conf.d/supervisord.conf
 
