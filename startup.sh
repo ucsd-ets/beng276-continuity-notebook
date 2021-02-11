@@ -1,3 +1,4 @@
+#!/bin/bash
 USER=${USER:-root}
 HOME=/root
 if [ "$USER" != "root" ]; then
