@@ -4,6 +4,8 @@ FROM cmrglab/cont_release_vnc
 # this containers supervisor.conf runs all 6 processes
 #RUN chmod 777 /etc/supervisor/conf.d/supervisord.conf
 RUN useradd -u 58585 jis269
+RUN useradd -u 68744 dta001
+RUN useradd -u 142 pjamason
 RUN chmod -R og+rwX /etc/nginx /etc/supervisor /root /var/log /var/run /var/lib/nginx /usr/local/bin/
 #RUN touch /var/log/supervisor/supervisord.log
 ADD startup.sh /
