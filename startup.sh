@@ -1,4 +1,5 @@
 #!/bin/bash
+export LD_PRELOAD=""
 USER=${USER:-root}
 HOME=/root
 if [ "$USER" != "root" ]; then
@@ -78,4 +79,3 @@ PASSWORD=
 HTTP_PASSWORD=
 
 exec /bin/tini -- supervisord -n -c /etc/supervisor/supervisord.conf
-
