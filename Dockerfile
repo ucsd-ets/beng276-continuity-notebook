@@ -1,13 +1,10 @@
 FROM cmrglab/cont_release_vnc
 
-# per david - comment out ADD stmt below and add following;
-# this containers supervisor.conf runs all 6 processes
-#RUN chmod 777 /etc/supervisor/conf.d/supervisord.conf
-RUN useradd -u 58585 jis269
-RUN useradd -u 68744 dta001
-RUN useradd -u 142 pjamason
-RUN chmod -R og+rwX /etc/nginx /etc/supervisor /root /var/log /var/run /var/lib/nginx /usr/local/bin/
-#RUN touch /var/log/supervisor/supervisord.log
 ADD startup.sh /
+ADD default /etc/nginx/sites-enabled
 ADD supervisord.conf /etc/supervisor/conf.d
-#ADD supervisord.conf /etc/x11vnc.pass
+
+RUN useradd -u 58585 jis269 && \
+    useradd -u 68744 dta001 && \
+    useradd -u 142 pjamason && \
+    chmod -R og+rwX /etc/nginx /etc/supervisor /root /var/log /var/run /var/lib/nginx /usr/local/bin/
