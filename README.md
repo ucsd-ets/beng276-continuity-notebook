@@ -16,7 +16,7 @@
    ```
 5. Wait for the shell output ``` Connected to old-continuity ``` <br/>
 6. Take first url in shell output (e.g., http://128.54.65.160:16585) and paste into your browser url. Wait for the VNC password window<br/>
-7. password: (ask staff)<br/>
+7. password can be found in the first line of shell output. Look for ```Building connection to old-continuity; credencial for current connection:```<br/>
 9. press ```Send Password```<br/>
 
 To terminate pod/processes
