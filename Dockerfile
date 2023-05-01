@@ -8,8 +8,8 @@ COPY --from=continuity /root/continuity /opt/continuity
 RUN apt-get update     \
     && apt-get upgrade -y     \
     && apt-get install -y     build-essential     ca-certificates     gcc     git     libpq-dev     make     python2.7     libglu1     autoconf     swig     filezilla     \
-    && apt-get autoremove     \
-    && apt-get clean
+#    && apt-get autoremove     \
+#    && apt-get clean
     
 WORKDIR /opt/continuity
 RUN /bin/bash -c ./setup && \
