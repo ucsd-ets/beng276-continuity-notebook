@@ -6,8 +6,8 @@ USER root
 COPY --from=continuity /root/continuity /opt/continuity
 
 RUN apt-get update && \
-    apt-get upgrade -y && \
-    apt-get install -y \
+#    apt-get upgrade -y && \
+    apt-get install -yq \
       build-essential \
       ca-certificates \
       gcc \
