@@ -1,9 +1,6 @@
-FROM cmrglab/cont_release_vnc:latest AS continuity
-
 FROM ghcr.io/ucsd-ets/pilot-vnc-desktop:remove-webproxy-patch
 USER root
 
-COPY --from=continuity /root/continuity /opt/continuity
 
 RUN apt-get update && \
 #    apt-get upgrade -y && \
@@ -22,6 +19,15 @@ RUN apt-get update && \
 #    && apt-get autoremove     \
 #    && apt-get clean
     
+    
+RUN fileid="1InDDqs_626fEHMMB4tJujGVhM_ED-UWz" && \
+    cd /opt/ && \
+    filename="OldContLinux.zip" && \
+    html=`curl -c ./cookie -s -L "https://drive.google.com/uc?export=download&id=${fileid}"` && \
+    curl -Lb ./cookie "https://drive.google.com/uc?export=download&`echo ${html}|grep -Po '(confirm=[a-zA-Z0-9\-_]+)'`&id=${fileid}" -o ${filename} && \ 
+    unzip OldContLinux.zip -d continuity && \
+    ls -l /opt/continuity
+
 WORKDIR /opt/continuity
 RUN /bin/bash -c ./setup && \
   source mglinit && \
