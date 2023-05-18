@@ -28,11 +28,15 @@ RUN fileid="1InDDqs_626fEHMMB4tJujGVhM_ED-UWz" && \
     unzip OldContLinux.zip -d continuity && \
     rm -f OldContLinux.zip && \
     ls -l /opt/continuity && \
-    chmod -R 777 /opt/continuity 
+    chmod -R 777 /opt/continuity
     
 
-WORKDIR /opt/continuity
-# RUN /bin/bash -c ./setup && \
+    
+
+WORKDIR /opt/continuity/Continuity 
+
+RUN cd /opt/continuity/Continuity && \
+    ./continuitySetup.sh 
 #  source mglinit && \
 #  autoconf && \
 #  ./configure && \
