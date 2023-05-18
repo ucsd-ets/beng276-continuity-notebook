@@ -15,7 +15,6 @@ RUN apt-get update && \
       libglu1 \
       autoconf \
       swig \
-      pcre2 \
       filezilla
 #    && apt-get autoremove     \
 #    && apt-get clean
