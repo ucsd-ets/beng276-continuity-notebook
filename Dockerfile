@@ -40,15 +40,16 @@ RUN cd /opt/Continuity && \
     
     # Download Example Files
     # Standard Model
-    filename="sheet2304.cont6" && \
-    fileid="1y_wezO54wgfJLD3RkMdr2pGfUOKuVAuq" && \
-    html=`curl -c ./cookie -s -L "https://drive.google.com/uc?export=download&id=${fileid}"` && \
-    curl -Lb ./cookie "https://drive.google.com/uc?export=download&`echo ${html}|grep -Po '(confirm=[a-zA-Z0-9\-_]+)'`&id=${fileid}" -o ${filename} && \ 
+    filename2="sheet2304.cont6" && \
+    fileid2="1y_wezO54wgfJLD3RkMdr2pGfUOKuVAuq" && \
+    html=`curl -c ./cookie -s -L "https://drive.google.com/uc?export=download&id=${fileid2}"` && \
+    curl -Lb ./cookie "https://drive.google.com/uc?export=download&`echo ${html}|grep -Po '(confirm=[a-zA-Z0-9\-_]+)'`&id=${fileid2}" -o ${filename2} && \ 
     # Spiral Model
-    filename="sheet2304_spiral.cont6" && \
-    fileid="1kYsk32CxMurY0eeEiff6vZ3epEpK9n_Z" && \
-    html=`curl -c ./cookie -s -L "https://drive.google.com/uc?export=download&id=${fileid}"` && \
-    curl -Lb ./cookie "https://drive.google.com/uc?export=download&`echo ${html}|grep -Po '(confirm=[a-zA-Z0-9\-_]+)'`&id=${fileid}" -o ${filename} 
+    filename3="sheet2304_spiral.cont6" && \
+    fileid3="1kYsk32CxMurY0eeEiff6vZ3epEpK9n_Z" && \
+    html=`curl -c ./cookie -s -L "https://drive.google.com/uc?export=download&id=${fileid3}"` && \
+    curl -Lb ./cookie "https://drive.google.com/uc?export=download&`echo ${html}|grep -Po '(confirm=[a-zA-Z0-9\-_]+)'`&id=${fileid3}" -o ${filename3} && \
+    ls -lh
     
     
     
