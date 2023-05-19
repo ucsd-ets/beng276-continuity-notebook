@@ -25,17 +25,17 @@ RUN fileid="1InDDqs_626fEHMMB4tJujGVhM_ED-UWz" && \
     filename="OldContLinux.zip" && \
     html=`curl -c ./cookie -s -L "https://drive.google.com/uc?export=download&id=${fileid}"` && \
     curl -Lb ./cookie "https://drive.google.com/uc?export=download&`echo ${html}|grep -Po '(confirm=[a-zA-Z0-9\-_]+)'`&id=${fileid}" -o ${filename} && \ 
-    unzip OldContLinux.zip -d continuity && \
+    unzip OldContLinux.zip -d /opt/ && \
     rm -f OldContLinux.zip && \
-    ls -l /opt/continuity && \
-    chmod -R 777 /opt/continuity
+    ls -l /opt/Continuity && \
+    chmod -R 777 /opt/Continuity
     
 
     
 
-WORKDIR /opt/continuity/Continuity 
+WORKDIR /opt/Continuity 
 
-RUN cd /opt/continuity/Continuity && \
+RUN cd /opt/Continuity && \
     ./continuitySetup.sh 
 #  source mglinit && \
 #  autoconf && \
