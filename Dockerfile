@@ -41,12 +41,12 @@ RUN cd /opt/Continuity && \
     # Download Example Files
     # Standard Model
     filename="sheet2304.cont6" && \
-    fieldid="1y_wezO54wgfJLD3RkMdr2pGfUOKuVAuq" && \
+    fileid="1y_wezO54wgfJLD3RkMdr2pGfUOKuVAuq" && \
     html=`curl -c ./cookie -s -L "https://drive.google.com/uc?export=download&id=${fileid}"` && \
     curl -Lb ./cookie "https://drive.google.com/uc?export=download&`echo ${html}|grep -Po '(confirm=[a-zA-Z0-9\-_]+)'`&id=${fileid}" -o ${filename} && \ 
     # Spiral Model
     filename="sheet2304_spiral.cont6" && \
-    fieldid="1kYsk32CxMurY0eeEiff6vZ3epEpK9n_Z" && \
+    fileid="1kYsk32CxMurY0eeEiff6vZ3epEpK9n_Z" && \
     html=`curl -c ./cookie -s -L "https://drive.google.com/uc?export=download&id=${fileid}"` && \
     curl -Lb ./cookie "https://drive.google.com/uc?export=download&`echo ${html}|grep -Po '(confirm=[a-zA-Z0-9\-_]+)'`&id=${fileid}" -o ${filename} 
     
