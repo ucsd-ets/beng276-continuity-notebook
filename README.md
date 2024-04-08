@@ -8,6 +8,10 @@
 4. Navigate to http://dsmlp-login.ucsd.edu:19790/user/USERNAME/?token=REDACTED
 5. New -> desktop
 6. Open terminal, cd /opt/continuity
+7. Type ./continuity or ./continuity --no-shell to start continuity. May take some time to load.
+8. You may be propted for an access code, which is 5785799194044202 however this is not needed unless you are pulling data from the continuity database/server.
+See also
+Also see https://github.com/ucsd-ets/old-continuity
 
 To terminate pod/processes
 ```sh
